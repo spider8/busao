@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const app = express();
+var app = express();
 
 const PORT = 8080;
 
@@ -12,4 +12,5 @@ app.get('/', function (req, res) {
 
 app.listen(PORT, ()=>{
 	console.log("Servidor no ar..");
-	});
+	}
+);
