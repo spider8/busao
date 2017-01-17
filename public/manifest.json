@@ -1,0 +1,16 @@
+{
+  "name": "My Busao",
+  "short_name": "My Busao",
+  "display": "standalone",
+  "background_color": "blue",
+  "description": "Saiba onde está o busao.",
+  "icons": [{
+    "src": "icons/busIcon.png",
+    "sizes": "48x48",
+    "type": "image/png"
+  }],
+  
+  "related_applications": [{
+    "platform": "web"
+  }]
+}
