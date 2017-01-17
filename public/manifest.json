@@ -2,8 +2,8 @@
   "name": "My Busao",
   "short_name": "My Busao",
   "display": "standalone",
-  "background_color": "blue",
-  "theme_color": "blue",
+  "background_color": "#ffee58",
+  "theme_color": "#82b1ff",
   "description": "Saiba onde está o busao.",
   "start_url": "/",
   "icons": [
