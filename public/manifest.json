@@ -12,5 +12,6 @@
   
   "related_applications": [{
     "platform": "web"
-  }]
+  }],
+  "theme_color": "blue"
 }
