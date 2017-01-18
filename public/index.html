@@ -11,7 +11,7 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    
+
     <!--Web manifest-->
     <link rel="manifest" href="manifest.json">
 
@@ -53,11 +53,14 @@
         });
       }
 
-      $('#user').click(()=>{
+      $('#user').click((event)=>{
+        // Don't show Touch to serach
+        event.preventDefault();
         map.setCenter({ lat: UserMarker.position.lat(), lng: UserMarker.position.lng()});
       })
 
-      $('#bus').click(()=>{
+      $('#bus').click((event)=>{
+        event.preventDefault();
         map.setCenter({ lat: BusMarker.position.lat(), lng: BusMarker.position.lng()});
       })
 
