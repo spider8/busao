@@ -8,14 +8,14 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "icons/hdpi.png",
-      "type": "image/png",
-      "sizes": "72x72"
-    },
-    {
       "src": "icons/xhdpi.png",
       "type": "image/png",
       "sizes": "96x96"
+    },
+    {
+      "src": "icons/xxhdpi.png",
+      "type": "image/png",
+      "sizes": "144x144"
     },
     {
       "src": "icons/xxxhdpi.png",
