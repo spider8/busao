@@ -13,6 +13,9 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
 
+    <!-- Socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+
     <!--Web manifest-->
     <link rel="manifest" href="manifest.json">
 
@@ -103,13 +106,15 @@
     </div>
     <script>
         var map, UserMarker, BusMarker;
+        var socket = io();
+        var busL = {
+            lat: -8.399301,
+            lng: -35.056784
+          };
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: -8.5066276,
-                    lng: -35.0057167
-                },
+                center: busL,
                 zoom: 15,
                 disableDefaultUI: true
             });
@@ -149,16 +154,14 @@
                 });
 
                 BusMarker = new google.maps.Marker({
-                    position: {
-                        lat: -8.399301,
-                        lng: -35.056784
-                    },
+                    position: busL,
+                    animation: google.maps.Animation.BOUNCE,
                     map: map,
                     icon: imageBus
                 });
 
                 $('.preloader-wrapper').hide('fast');
-                $('.content').fadeTo( "slow" , 1);
+                $('.content').fadeTo("slow", 1);
             };
 
             var geoError = function(position) {
@@ -172,6 +175,7 @@
             navigator.geolocation.watchPosition(geoSuccess, geoError);
         };
     </script>
+    <!-- Load Google map -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJQC-wRXNwsY49AgnWLFXBWaFpLkkGu-g&callback=initMap" async defer></script>
 </body>
 
