@@ -34,14 +34,12 @@
 
         .preloader-wrapper {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transfor: translate(-50%, -50%);
+            left: 41.2%;
         }
     </style>
 </head>
 
-<body>
+<body class="valign-wrapper">
     <div class='content'>
         <div id="map"></div>
         <div class="fixed-action-btn click-to-toggle">
@@ -54,7 +52,7 @@
             </ul>
         </div>
     </div>
-    <div class="preloader-wrapper big active center">
+    <div class="preloader-wrapper big active valign">
         <div class="spinner-layer spinner-blue">
             <div class="circle-clipper left">
                 <div class="circle"></div>
@@ -159,8 +157,8 @@
                     icon: imageBus
                 });
 
-                $('.preloader-wrapper').hide();
-                $('.content').css('opacity', '1');
+                $('.preloader-wrapper').hide('fast');
+                $('.content').fadeTo( "slow" , 1);
             };
 
             var geoError = function(position) {
