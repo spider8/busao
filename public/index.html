@@ -123,7 +123,7 @@
         $('#user').click((event) => {
             // Don't show Touch to serach
             event.preventDefault();
-            map.setCenter({
+            map.panTo({
                 lat: UserMarker.position.lat(),
                 lng: UserMarker.position.lng()
             });
@@ -131,7 +131,7 @@
 
         $('#bus').click((event) => {
             event.preventDefault();
-            map.setCenter({
+            map.panTo({
                 lat: BusMarker.position.lat(),
                 lng: BusMarker.position.lng()
             });
