@@ -31,26 +31,25 @@ function initMap() {
         map: map,
         icon: imageBus
     });
+
+    $('#user').click((event) => {
+        // Don't show Touch to serach
+        event.preventDefault();
+        map.panTo({
+            lat: UserMarker.position.lat(),
+            lng: UserMarker.position.lng()
+        });
+    })
+
+    $('#bus').click((event) => {
+        // Don't show Touch to serach
+        event.preventDefault();
+        map.panTo({
+            lat: BusMarker.position.lat(),
+            lng: BusMarker.position.lng()
+        });
+    })
 }
-
-$('#user').click((event) => {
-    // Don't show Touch to serach
-    event.preventDefault();
-    console.log("Cliked user");
-    map.panTo({
-        lat: UserMarker.position.lat(),
-        lng: UserMarker.position.lng()
-    });
-})
-
-$('#bus').click((event) => {
-    event.preventDefault();
-    console.log("Cliked bus");
-    map.panTo({
-        lat: BusMarker.position.lat(),
-        lng: BusMarker.position.lng()
-    });
-})
 
 var geoSuccess = function(position) {
     UserMarker.setPosition({
