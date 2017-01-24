@@ -1,0 +1,13 @@
+html, body, .content, #map {
+    height: 100%;
+    width: 100%;
+}
+
+.content {
+    opacity: 0.4;
+}
+
+.preloader-wrapper {
+    position: fixed;
+    left: 41.2%;
+}
