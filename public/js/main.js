@@ -57,8 +57,6 @@ var geoSuccess = function(position) {
         lng: position.coords.longitude
     });
 
-    BusMarker.setAnimation(google.maps.Animation.BOUNCE);
-
     $('.preloader-wrapper').hide('fast');
     $('.content').fadeTo("slow", 1);
 };
