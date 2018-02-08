@@ -1,14 +1,9 @@
-var map, UserMarker, BusMarker;
-var socket = io();
-
-var busL = {
-    lat: -8.399301,
-    lng: -35.056784
-};
+var map, userMarker, busMarker;
+var socket = io.connect('http://localhost:3333');
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: busL,
+        //center: ,
         zoom: 15,
         disableDefaultUI: true
     });
@@ -16,17 +11,12 @@ function initMap() {
     var image = 'icons/pin-white64.png';
     var imageBus = 'icons/bus-white64.png';
 
-    UserMarker = new google.maps.Marker({
-        position: {
-            lat: 0,
-            lng: 0
-        },
+    userMarker = new google.maps.Marker({
         map: map,
         icon: image
     });
 
-    BusMarker = new google.maps.Marker({
-        position: busL,
+    busMarker = new google.maps.Marker({
         animation: google.maps.Animation.BOUNCE,
         map: map,
         icon: imageBus
@@ -35,39 +25,27 @@ function initMap() {
     $('#user').click((event) => {
         // Don't show Touch to serach
         event.preventDefault();
-        map.panTo({
-            lat: UserMarker.position.lat(),
-            lng: UserMarker.position.lng()
-        });
+        map.panTo(userMarker.getPosition());
     })
 
     $('#bus').click((event) => {
         // Don't show Touch to serach
         event.preventDefault();
-        map.panTo({
-            lat: BusMarker.position.lat(),
-            lng: BusMarker.position.lng()
-        });
+        map.panTo(busMarker.getPosition());
     })
 }
 
-var geoSuccess = function(position) {
-    UserMarker.setPosition({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-    });
-
+socket.on('location', function (data) {
     $('.preloader-wrapper').hide('fast');
     $('.content').fadeTo("slow", 1);
-};
 
-var geoError = function(position) {
-    console.log('Error occurred to get position. Error code: ' + error.code);
-    // error.code can be:
-    //   0: unknown error
-    //   1: permission denied
-    //   2: position unavailable (error response from location provider)
-    //   3: timed out
-};
+    busMarker.setPosition({ lat: data.lat, lng: data.lng });
+    map.panTo(busMarker.getPosition());
+});
 
-navigator.geolocation.watchPosition(geoSuccess, geoError);
+navigator.geolocation.getCurrentPosition(function (position) {
+    userMarker.setPosition({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+    })
+});
