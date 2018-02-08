@@ -22,8 +22,8 @@ io.on('connection', function (socket) {
 
     let interval = setInterval(function () {
         io.emit('location', {
-            lat: startLocation.lat += 0.000001,
-            lng: startLocation.lng += 0.000001,
+            lat: startLocation.lat += 0.0001,
+            lng: startLocation.lng += 0.0001,
         });
     }, 5000);
 
