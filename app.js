@@ -3,9 +3,10 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
+//Coordenadas Ceagri 2
 var startLocation = {
-    lat: -8.399301,
-    lng: -35.056784
+    lat: -8.014272,
+    lng: -34.950131
 };
 
 var interval = setInterval(function () {

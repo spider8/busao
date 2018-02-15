@@ -1,5 +1,5 @@
 var map, userMarker, busMarker;
-var socket = io.connect('http://localhost:3333');
+var socket = io();
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
