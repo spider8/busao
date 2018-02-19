@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var morgan = require('morgan');
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
@@ -20,6 +21,7 @@ server.listen(3333, function () {
     console.log("Server online...");
 });
 
+app.use(morgan('dev'));
 app.use(express.static('public'));
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
