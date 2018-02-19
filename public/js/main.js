@@ -4,7 +4,7 @@ var socket = io();
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         //center: ,
-        zoom: 15,
+        zoom: 17,
         disableDefaultUI: true
     });
 
@@ -21,27 +21,27 @@ function initMap() {
         map: map,
         icon: imageBus
     });
+}
 
+socket.on('location', function (data) {
+    busMarker.setPosition({ lat: data.lat, lng: data.lng });
+    console.log(data);
+});
+
+socket.on('ready', function (data) {
     $('#user').click((event) => {
-        // Don't show Touch to serach
         event.preventDefault();
         map.panTo(userMarker.getPosition());
     })
 
     $('#bus').click((event) => {
-        // Don't show Touch to serach
         event.preventDefault();
         map.panTo(busMarker.getPosition());
     })
-}
 
-socket.on('location', function (data) {
     $('.preloader-wrapper').hide('fast');
     $('.content').fadeTo("slow", 1);
-
-    busMarker.setPosition({ lat: data.lat, lng: data.lng });
-    map.panTo(busMarker.getPosition());
-});
+})
 
 navigator.geolocation.getCurrentPosition(function (position) {
     userMarker.setPosition({

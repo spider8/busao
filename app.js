@@ -1,25 +1,22 @@
-var express = require('express');
-var app = express();
-var morgan = require('morgan');
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+const express = require('express');
+const app = express();
+const morgan = require('morgan');
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const locations = require('./mock_position_ufrpe');
 
-//Coordenadas Ceagri 2
-var startLocation = {
-    lat: -8.014272,
-    lng: -34.950131
-};
-
-var interval = setInterval(function () {
-    io.emit('location', {
-        lat: startLocation.lat += 0.0001,
-        lng: startLocation.lng += 0.0001,
-    });
-}, 5000);
+let index = 0;
+let interval = setInterval(function () {
+    io.emit('location', locations[index]);
+    index++;
+    index %= locations.length;
+}, 4000);
 
 server.listen(3333, function () {
     console.log("Server online...");
 });
+
+app.set('port', process.env.PORT || 3000);
 
 app.use(morgan('dev'));
 app.use(express.static('public'));
@@ -30,6 +27,7 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
     console.log("New user connect.");
 
+    socket.emit('ready');
     socket.on("disconnect", function () {
         console.log("Disconected.")
     })
