@@ -1,34 +1,11 @@
 var map, userMarker, busMarker;
+var isInitialized = false;
 var socket = io();
 
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        //center: ,
-        zoom: 17,
-        disableDefaultUI: true
-    });
+const userIcon = 'icons/pin-white64.png';
+const busIcon = 'icons/bus-white64.png';
 
-    var image = 'icons/pin-white64.png';
-    var imageBus = 'icons/bus-white64.png';
-
-    userMarker = new google.maps.Marker({
-        map: map,
-        icon: image
-    });
-
-    busMarker = new google.maps.Marker({
-        animation: google.maps.Animation.BOUNCE,
-        map: map,
-        icon: imageBus
-    });
-}
-
-socket.on('location', function (data) {
-    busMarker.setPosition({ lat: data.lat, lng: data.lng });
-    console.log(data);
-});
-
-socket.on('ready', function (data) {
+function setup() {
     $('#user').click((event) => {
         event.preventDefault();
         map.panTo(userMarker.getPosition());
@@ -41,7 +18,34 @@ socket.on('ready', function (data) {
 
     $('.preloader-wrapper').hide('fast');
     $('.content').fadeTo("slow", 1);
-})
+    map.setCenter(busMarker.getPosition());
+    isInitialized = true;
+}
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: { "lat": -8.01449, "lng": -34.95036 }, // Localização do prédio central UFRPE
+        zoom: 17,
+        disableDefaultUI: true
+    });
+
+    userMarker = new google.maps.Marker({
+        map: map,
+        icon: userIcon
+    });
+
+    busMarker = new google.maps.Marker({
+        animation: google.maps.Animation.BOUNCE,
+        map: map,
+        icon: busIcon
+    });
+}
+
+socket.on('location', function (data) {
+    busMarker.setPosition({ lat: data.lat, lng: data.lng });
+    isInitialized || setup();
+
+});
 
 navigator.geolocation.getCurrentPosition(function (position) {
     userMarker.setPosition({
