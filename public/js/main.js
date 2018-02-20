@@ -18,6 +18,9 @@ function setup() {
 
     $('.preloader-wrapper').hide('fast');
     $('.content').fadeTo("slow", 1);
+
+    $('.fixed-action-btn').openFAB();
+
     map.setCenter(busMarker.getPosition());
     isInitialized = true;
 }
